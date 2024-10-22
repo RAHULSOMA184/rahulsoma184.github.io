@@ -173,6 +173,26 @@
                 font-size: 3rem;
             }
         }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+            gap: 50px;
+        }
+
+        .social-link {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px 30px;
+            text-decoration: none;
+            color: #fff;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .social-link:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
     </style>
 </head>
 <body>
@@ -221,23 +241,15 @@
             </div>
         </section>
 
-        <section class="social-media" id="social">
+        <section class="social-media" id="contact">
             <h2 style="text-align: center; margin-bottom: 30px; font-size: 2.5rem; background: linear-gradient(45deg, #ff6b6b, #4ecdc4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Connect With Me</h2>
 
-            <div class="social-links" style="display: flex; justify-content: center; margin-top: 40px; gap: 50px;">
+            <div class="social-links">
                 <!-- GitHub -->
-                <a href="https://github.com/yourusername" target="_blank" class="social-link" style="background: rgba(255, 255, 255, 0.1); width: 70px; height: 70px; text-decoration: none; display: flex; justify-content: center; align-items: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                    </svg>
-                </a>
+                <a href="https://github.com/yourusername" target="_blank" class="social-link">GitHub</a>
                 
                 <!-- LinkedIn -->
-                <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link" style="background: rgba(255, 255, 255, 0.1); width: 70px; height: 70px; text-decoration: none; display: flex; justify-content: center; align-items: center;">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M16 8a6 6 0 1 0-12 0 6 6 0 0 0 12 0zM2 24h4V12H2zM22 24h-4V12h4zM22 4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v4h4v12h4V6z"></path>
-                    </svg>
-                </a>
+                <a href="https://linkedin.com/in/yourusername" target="_blank" class="social-link">LinkedIn</a>
             </div>
         </section>
     </div>
