@@ -16,7 +16,7 @@
 
         body {
             background: #0a0a2a;
-            overflow-x: hidden;
+            overflow: hidden; /* Prevent scrolling */
             perspective: 1000px;
         }
 
@@ -127,11 +127,11 @@
         }
 
         section {
-            min-height: 100vh;
+            min-height: 100vh; /* Keep full height */
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 100px 0;
+            padding: 100px 20px; /* Adjusted padding */
         }
 
         .hero {
@@ -332,185 +332,103 @@
 
         footer {
             text-align: center;
-            padding: 20px;
-            background: rgba(0, 0, 0, 0.3);
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-
-            .about-image {
-                height: 300px;
-            }
+            padding: 20px 0;
+            background: rgba(10, 10, 42, 0.9);
+            position: relative;
+            z-index: 100;
         }
     </style>
 </head>
 <body>
-    <div id="stars-container"></div>
-    
-    <div class="container">
-        <nav>
-            <div class="logo">Portfolio</div>
-            <div class="nav-links">
-                <a href="#home">Home</a>
-                <a href="#about">About</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
-            </div>
-        </nav>
-
-        <section class="hero" id="home">
-            <div class="hero-content">
-                <h1>Welcome to My Universe</h1>
-                <div class="typing-text"></div>
-                <a href="#projects" class="cta-button">Explore My Work</a>
-            </div>
-        </section>
-
-        <section class="about" id="about">
-            <div class="about-content">
-                <div class="about-image"></div>
-                <div class="about-text">
-                    <h2>About Me</h2>
-                    <p>Passionate developer exploring the frontiers of technology. With a background in innovative solutions, I create digital experiences that push boundaries.</p>
-                    <div class="skills">
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">UI/UX</span>
-                        <span class="skill-tag">Web3</span>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="projects" id="projects">
-            <div class="project-grid">
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Project 1</h3>
-                    <p>A fascinating project that pushes boundaries.</p>
-                </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Project 2</h3>
-                    <p>Innovation meets creativity.</p>
-                </div>
-                <div class="project-card">
-                    <div class="project-image"></div>
-                    <h3>Project 3</h3>
-                    <p>Breaking new ground in development.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact" id="contact">
-            <div class="contact-form">
-                <h2>Get In Touch</h2>
-                <div class="form-group">
-                    <input type="text" placeholder="Name" />
-                </div>
-                <div class="form-group">
-                    <input type="email" placeholder="Email" />
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="Message"></textarea>
-                </div>
-                <button class="cta-button">Send Message</button>
-
-                <div class="social-links">
-                    <a href="#" class="social-link">GH</a>
-                    <a href="#" class="social-link">LI</a>
-                    <a href="#" class="social-link">TW</a>
-                </div>
-            </div>
-        </section>
-
-        <footer>
-            <p>© 2024 Your Name. All rights reserved.</p>
-        </footer>
+    <div id="stars-container">
+        <div class="star" style="top: 10%; left: 20%; width: 2px; height: 2px;"></div>
+        <div class="star" style="top: 30%; left: 50%; width: 3px; height: 3px;"></div>
+        <div class="star" style="top: 60%; left: 80%; width: 2.5px; height: 2.5px;"></div>
+        <div class="shooting-star" style="top: 70%; left: 10%;"></div>
+        <div class="shooting-star" style="top: 40%; left: 70%;"></div>
     </div>
 
-    <script>
-        // Create stars with 3D effect
-        function createStars() {
-            const container = document.getElementById('stars-container');
-            const colors = ['#ff6b6b', '#4ecdc4', '#fff'];
-            
-            for (let i = 0; i < 200; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                // Random position in 3D space
-                const x = Math.random() * window.innerWidth;
-                const y = Math.random() * window.innerHeight;
-                const z = Math.random() * 1000;
-                
-                // Random size
-                const size = Math.random() * 3;
-                
-                // Random color
-                const color = colors[Math.floor(Math.random() * colors.length)];
-                
-                // Random animation delay
-                const delay = Math.random() * 2;
-                
-                star.style.left = `${x}px`;
-                star.style.top = `${y}px`;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.background = color;
-                star.style.animationDelay = `${delay}s`;
-                star.style.transform = `translateZ(${z}px)`;
-                
-                container.appendChild(star);
-            }
-        }
+    <nav>
+        <div class="logo">Interstellar Portfolio</div>
+        <div class="nav-links">
+            <a href="#hero">Home</a>
+            <a href="#about">About</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-        // Create shooting stars
-        function createShootingStars() {
-            const container = document.getElementById('stars-container');
-            
-            setInterval(() => {
-                const shootingStar = document.createElement('div');
-                shootingStar.className = 'shooting-star';
-                
-                const startY = Math.random() * window.innerHeight;
-                shootingStar.style.top = `${startY}px`;
-                
-                container.appendChild(shootingStar);
-                
-                setTimeout(() => {
-                    shootingStar.remove();
-                }, 2000);
-            }, 3000);
-        }
+    <section id="hero" class="hero">
+        <div class="hero-content">
+            <h1>Welcome to My Portfolio</h1>
+            <div class="typing-text">I'm a Data Analytics Enthusiast</div>
+            <a href="#projects" class="cta-button">View Projects</a>
+        </div>
+    </section>
 
-        // Typing effect
-        function typeText() {
-            const text = "Exploring the frontiers of web development...";
-            const typingText = document.querySelector('.typing-text');
-            let index = 0;
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-image"></div>
+            <div class="about-text">
+                <h2>About Me</h2>
+                <p>I am passionate about transforming data into actionable insights. With a strong background in analytics, I enjoy exploring data and telling compelling stories through visualization.</p>
+                <div class="skills">
+                    <div class="skill-tag">Python</div>
+                    <div class="skill-tag">SQL</div>
+                    <div class="skill-tag">Tableau</div>
+                    <div class="skill-tag">Machine Learning</div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-            function type() {
-                if (index < text.length) {
-                    typingText.textContent += text.charAt(index);
-                    index++;
-                    setTimeout(type, 100);
-                } else {
-                    setTimeout(() => {
-                        typingText.textContent = '';
-                        index = 0;
-                        type();
-                    },
+    <section id="projects" class="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card">
+                <div class="project-image"></div>
+                <h3>Project Title 1</h3>
+                <p>Brief description of project 1.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-image"></div>
+                <h3>Project Title 2</h3>
+                <p>Brief description of project 2.</p>
+            </div>
+            <div class="project-card">
+                <div class="project-image"></div>
+                <h3>Project Title 3</h3>
+                <p>Brief description of project 3.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Contact Me</h2>
+        <form class="contact-form">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+                <label for="message">Message</label>
+                <textarea id="message" required></textarea>
+            </div>
+            <button type="submit" class="cta-button">Send</button>
+        </form>
+        <div class="social-links">
+            <a href="#" class="social-link">FB</a>
+            <a href="#" class="social-link">IG</a>
+            <a href="#" class="social-link">LI</a>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Interstellar Portfolio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
