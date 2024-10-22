@@ -1,8 +1,13 @@
 const canvas = document.getElementById('matrixCanvas');
 const ctx = canvas.getContext('2d');
 
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
+// Set the canvas to the document's full height
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = document.body.scrollHeight; // Dynamically set canvas height based on content
+}
+resizeCanvas(); // Call the function initially
+window.addEventListener('resize', resizeCanvas); // Resize when window is resized
 
 const letters = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 const fontSize = 16;
