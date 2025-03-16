@@ -1,39 +1,164 @@
-html, body {
+/* General Styling */
+body {
+    font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%;
-    background: black;
-    color: #00FF00; /* Matrix green */
-    font-family: 'Courier New', Courier, monospace;
+    background-color: #ffffff;
+    color: #333;
 }
 
-#matrixCanvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
+h2 {
+    color: #0071CE;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-.content {
-    position: relative;
-    z-index: 1;
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
+.btn {
+    display: inline-block;
+    background-color: #FFD814;
+    color: #333;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #f0c30f;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #0071CE;
+    padding: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar .logo {
+    color: #ffffff;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navbar .nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.navbar .nav-links li {
+    display: inline;
+}
+
+.navbar .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.navbar .nav-links a:hover {
+    color: #FFD814;
+}
+
+/* Hero Section */
+.hero {
+    background-color: #0071CE;
+    color: #ffffff;
+    padding: 100px 20px;
     text-align: center;
 }
 
-section {
-    margin: 30px 0;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #00FF00;
+.hero h1 {
+    font-size: 36px;
 }
 
-footer {
-    margin-top: 30px;
+.hero p {
+    font-size: 18px;
+}
+
+.hero .btn {
+    background-color: #FFD814;
+    color: #333;
+}
+
+/* Projects Section */
+.projects {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+}
+
+.project-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.project-card {
+    background-color: #ffffff;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+}
+
+/* Skills Section */
+.skills {
+    padding: 40px 20px;
+}
+
+.skill-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.skill-card {
+    background-color: #0071CE;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+/* Experience Section */
+.experience {
+    padding: 40px 20px;
+    background-color: #f5f5f5;
+}
+
+.experience-card {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* Contact Section */
+.contact {
+    padding: 40px 20px;
+}
+
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.contact input,
+.contact textarea {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.contact .btn {
+    background-color: #0071CE;
+    color: #ffffff;
 }
