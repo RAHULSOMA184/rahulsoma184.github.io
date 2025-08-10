@@ -1,93 +1,492 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rahul S | Data Analyst Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rahul S — Portfolio</title>
+  <meta name="description" content="Rahul S — data analytics & AI portfolio. Municipal finance, visualization, and real‑world projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <meta property="og:title" content="Rahul S — Portfolio" />
+  <meta property="og:description" content="Data analytics & AI portfolio. Municipal finance, visualization, and real‑world projects." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="assets/og-image.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <link rel="icon" href="assets/favicon.png" />
+  <style>
+    /* ===== Theme tokens ===== */
+    :root {
+      --bg: #0b0c10;
+      --surface: #111317;
+      --card: #151923;
+      --text: #e7edf3;
+      --muted: #a9b2bd;
+      --brand: #5dd3ff;
+      --brand-2: #00ffa8;
+      --accent: #7a7dfe;
+      --ring: rgba(93,211,255,.3);
+      --max: 1200px;
+      --radius: 18px;
+      --shadow: 0 10px 30px rgba(0,0,0,.35);
+      --shadow-soft: 0 6px 18px rgba(0,0,0,.25);
+      --outline: 1px solid rgba(255,255,255,.08);
+    }
+    :root.light {
+      --bg: #f7fafc;
+      --surface: #ffffff;
+      --card: #f3f6fb;
+      --text: #0e141b;
+      --muted: #4a5568;
+      --brand: #0066ff;
+      --brand-2: #00b894;
+      --accent: #6c63ff;
+      --ring: rgba(0,102,255,.18);
+      --outline: 1px solid rgba(0,0,0,.06);
+      --shadow: 0 12px 32px rgba(2,6,23,.08);
+      --shadow-soft: 0 8px 20px rgba(2,6,23,.06);
+    }
+
+    /* ===== Reset & base ===== */
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0; background: var(--bg); color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      line-height: 1.55; letter-spacing: .15px;
+    }
+    a { color: inherit; text-decoration: none; }
+    img, video { max-width: 100%; display: block; border-radius: calc(var(--radius) - 4px); }
+    .container { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+    .pill { display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background: linear-gradient(90deg, rgba(93,211,255,.15), rgba(0,255,168,.15)); border: 1px solid rgba(255,255,255,.08); }
+    .btn { display:inline-flex; align-items:center; gap:10px; padding:12px 16px; border-radius: 12px; border: 1px solid rgba(255,255,255,.08); background: var(--surface); color: var(--text); box-shadow: var(--shadow-soft); transition: transform .1s ease, box-shadow .2s ease, border-color .2s ease; }
+    .btn:hover { transform: translateY(-1px); box-shadow: var(--shadow); border-color: rgba(255,255,255,.15); }
+    .btn.primary { background: linear-gradient(135deg, var(--brand), var(--accent)); color: #fff; border: none; }
+    .btn.ghost { background: transparent; border: 1px dashed rgba(255,255,255,.25); }
+    .tag { padding:6px 10px; border-radius:999px; border: var(--outline); font-size: 12px; color: var(--muted); }
+    .card { background: var(--card); border-radius: var(--radius); border: var(--outline); box-shadow: var(--shadow-soft); }
+    .grid { display: grid; gap: 20px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0,1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0,1fr)); }
+    @media (max-width: 900px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+    /* ===== Header / nav ===== */
+    .skip { position:absolute; left:-9999px; top:auto; width:1px; height:1px; overflow:hidden; }
+    .skip:focus { left: 20px; top: 20px; width:auto; height:auto; padding:8px 12px; background:#000; color:#fff; border-radius:8px; z-index:1000; }
+    header { position: sticky; top: 0; z-index: 999; backdrop-filter: blur(10px); background: color-mix(in oklab, var(--bg) 75%, transparent); border-bottom: var(--outline); }
+    .nav { display:flex; align-items:center; justify-content:space-between; padding: 14px 0; }
+    .nav-left { display:flex; align-items:center; gap: 12px; }
+    .logo { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--brand), var(--brand-2)); display:grid; place-items:center; font-weight: 800; color:#001; box-shadow: var(--shadow); }
+    .nav-links { display:flex; gap: 14px; flex-wrap: wrap; }
+    .nav-links a { padding:8px 10px; border-radius:10px; color: var(--muted); }
+    .nav-links a.active, .nav-links a:hover { background: rgba(255,255,255,.06); color: var(--text); }
+
+    /* ===== Hero ===== */
+    .hero { padding: 64px 0 32px; }
+    .hero-inner { display:grid; gap: 28px; grid-template-columns: 1.1fr .9fr; align-items: center; }
+    @media (max-width: 900px) { .hero-inner { grid-template-columns: 1fr; } }
+    .hero h1 { font-size: clamp(32px, 3.8vw, 58px); line-height: 1.06; letter-spacing: -1px; margin: 0 0 14px; }
+    .hero p { color: var(--muted); font-size: 18px; max-width: 60ch; }
+    .hero-cta { display:flex; gap:10px; flex-wrap:wrap; margin-top: 16px; }
+    .headshot { aspect-ratio: 1 / 1; width: 100%; background: radial-gradient(120% 120% at 100% 0, rgba(93,211,255,.2), rgba(0,255,168,.08) 40%, transparent 65%), var(--surface); border-radius: var(--radius); padding: 14px; border: var(--outline); }
+    .headshot .frame { width: 100%; height: 100%; background: url('assets/profile.jpg') center/cover no-repeat; border-radius: calc(var(--radius) - 8px); filter: saturate(1.05) contrast(1.02); }
+
+    /* ===== Sections ===== */
+    section { padding: 56px 0; }
+    section .section-head { display:flex; align-items:center; justify-content:space-between; gap: 16px; margin-bottom: 18px; }
+    h2 { font-size: clamp(24px, 2.8vw, 36px); margin: 0; letter-spacing: -.3px; }
+    .kicker { color: var(--muted); font-weight: 600; letter-spacing: .2px; text-transform: uppercase; font-size: 12px; }
+    .subtle { color: var(--muted); }
+
+    /* ===== About ===== */
+    .about { display:grid; gap:20px; grid-template-columns: .9fr 1.1fr; }
+    @media (max-width: 900px) { .about { grid-template-columns: 1fr; } }
+    .stats { display:grid; grid-template-columns: repeat(3,1fr); gap: 12px; }
+    .stat { text-align:center; padding: 18px; background: var(--surface); border-radius: 14px; border: var(--outline); }
+    .stat b { display:block; font-size: 22px; }
+
+    /* ===== Experience ===== */
+    .timeline { display:grid; gap: 14px; }
+    .item { display:grid; gap:12px; grid-template-columns: 1fr 4fr; align-items: start; padding: 16px; border: var(--outline); border-radius: 14px; background: var(--surface); }
+    .item .when { color: var(--muted); font-size: 13px; white-space: nowrap; }
+    .item h3 { margin: 0; font-size: 18px; }
+    .item .where { color: var(--muted); font-size: 14px; }
+    .item ul { margin: 8px 0 0; padding-left: 18px; }
+
+    /* ===== Projects ===== */
+    .proj { display:grid; gap: 14px; grid-template-columns: .9fr 1.1fr; padding: 16px; border-radius: 16px; border: var(--outline); background: var(--surface); overflow: clip; }
+    .proj-media { position: relative; aspect-ratio: 16 / 9; background: #0f1420; display:grid; place-items:center; border-radius: 12px; border: var(--outline); }
+    .proj-media .placeholder { color: var(--muted); font-family: "JetBrains Mono", monospace; font-size: 12px; opacity: .8; }
+    .proj h3 { margin: 0; font-size: 20px; }
+    .proj p { margin: 6px 0 12px; color: var(--muted); }
+    .proj .meta { display:flex; gap: 8px; flex-wrap: wrap; }
+
+    /* ===== Gallery ===== */
+    .gallery { display:grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .skeleton { aspect-ratio: 4/3; background: linear-gradient(90deg, rgba(255,255,255,.06), rgba(255,255,255,.02), rgba(255,255,255,.06)); background-size: 200% 100%; animation: shimmer 1.4s infinite; border-radius: 12px; border: var(--outline); }
+    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+
+    /* ===== Skills ===== */
+    .skills { display:flex; gap:8px; flex-wrap: wrap; }
+
+    /* ===== Contact ===== */
+    .contact-card { display:grid; gap: 14px; grid-template-columns: 1fr 1fr; padding: 18px; border-radius: 16px; border: var(--outline); background: var(--surface); }
+    @media (max-width: 900px) { .contact-card { grid-template-columns: 1fr; } }
+    .contact-actions { display:flex; gap: 10px; flex-wrap: wrap; }
+
+    /* ===== Footer ===== */
+    footer { padding: 40px 0; color: var(--muted); border-top: var(--outline); }
+
+    /* ===== Animations (reveal) ===== */
+    [data-reveal] { opacity: 0; translate: 0 10px; transition: opacity .5s ease, translate .5s ease; }
+    [data-reveal].visible { opacity: 1; translate: 0 0; }
+  </style>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Rahul S</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#skills">Skills</a></li>
-            <li><a href="#experience">Experience</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
+  <!-- ===== Header ===== -->
+  <header>
+    <div class="container nav">
+      <div class="nav-left">
+        <div class="logo" aria-label="Rahul S logo">RS</div>
+        <strong>Rahul S</strong>
+      </div>
+      <nav class="nav-links" aria-label="Primary">
+        <a href="#about">About</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+        <button id="theme" class="btn ghost" aria-label="Toggle theme">🌓</button>
+      </nav>
+    </div>
+  </header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1>Transforming Data Into Impactful Insights</h1>
-            <p>Aspiring Data Analyst | Python | SQL | Tableau</p>
-            <a href="#projects" class="btn">View My Work</a>
+  <main id="main">
+    <!-- ===== Hero ===== -->
+    <section class="hero container" id="home">
+      <div class="hero-inner">
+        <div>
+          <span class="pill">
+            <span>📍 Boston / Greater Boston</span>
+            <span class="tag">Open to opportunities</span>
+          </span>
+          <h1>Data Analytics & AI for Public Good</h1>
+          <p>
+            I’m <strong>Rahul S</strong>, a data analyst focused on <em>municipal finance, visualization, and AI‑driven tooling</em> — turning complex public datasets into decisions that help communities.
+            This portfolio highlights projects across <strong>forecasting</strong>, <strong>NLP</strong>, and <strong>GIS</strong>.
+          </p>
+          <div class="hero-cta">
+            <a class="btn primary" href="assets/Rahul_S_Resume.pdf" download>
+              ⬇️ Download Résumé
+            </a>
+            <a class="btn" href="https://www.linkedin.com/in/rahul-soma" target="_blank" rel="noopener">in/rahul‑soma</a>
+            <a class="btn" href="#projects">View Projects ↓</a>
+          </div>
         </div>
+        <div class="headshot" aria-label="Profile image placeholder">
+          <div class="frame" title="Upload your image at assets/profile.jpg"></div>
+        </div>
+      </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <h2>Projects</h2>
-        <div class="project-container">
-            <div class="project-card">
-                <h3>Campus Demographics Dashboard</h3>
-                <p>Visualized campus data using Tableau, providing insights into demographics and commuting patterns.</p>
+    <!-- ===== About ===== -->
+    <section class="container" id="about">
+      <div class="section-head">
+        <div>
+          <div class="kicker">About</div>
+          <h2>Who I am</h2>
+        </div>
+      </div>
+      <div class="about">
+        <div class="card" style="padding:18px" data-reveal>
+          <p>
+            <strong>Quick intro:</strong> Master’s student in Data Analytics (Tufts, ’26). Former Infrastructure Engineer (Kubernetes/Docker) with 3+ years in banking/fintech. Recent experience as a Data Analyst intern with the Massachusetts <em>Division of Local Services</em>, building AI‑assisted tools for municipal finance insights.
+          </p>
+          <p class="subtle">Replace with your own summary pulled from LinkedIn. Keep it 2–3 sentences, outcomes‑focused.</p>
+          <div class="stats">
+            <div class="stat"><b id="stat-yrs">3+</b><span class="subtle">Years in industry</span></div>
+            <div class="stat"><b id="stat-proj">12</b><span class="subtle">Projects</span></div>
+            <div class="stat"><b id="stat-talks">4</b><span class="subtle">Talks & demos</span></div>
+          </div>
+        </div>
+        <div class="card" style="padding:18px" data-reveal>
+          <h3 style="margin-top:0">Highlights</h3>
+          <ul>
+            <li>Built a <em>LocalGov Fiscal Assistant</em> prototype — an AI agent that answers finance questions and returns charts using DLS data.</li>
+            <li>Analyzed <em>bus lane violations</em> with spatial overlays to identify enforcement hotspots and equity impacts.</li>
+            <li>Developed real‑time <em>license plate recognition</em> demo using YOLOv4 + OpenCV + TensorFlow.</li>
+          </ul>
+          <p class="subtle">These are placeholders — edit to your actual outcomes (metrics, impact).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Experience ===== -->
+    <section class="container" id="experience">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Experience</div>
+          <h2>What I’ve worked on</h2>
+        </div>
+      </div>
+      <div class="timeline" data-reveal>
+        <!-- Item 1 -->
+        <div class="item">
+          <div class="when">2025 — Present</div>
+          <div>
+            <h3>Data Analyst Intern <span class="where">· Division of Local Services (DOR, MA)</span></h3>
+            <ul>
+              <li>Built forecasts and dashboards for municipal finance (tax levy, free cash, reserves).</li>
+              <li>Prototyped an AI chatbot for finance queries; added chart outputs and Excel exports.</li>
+              <li>Collaborated with cross‑functional teams; presented insights to leadership.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="item">
+          <div class="when">2021 — 2024</div>
+          <div>
+            <h3>Senior Systems Engineer (SRE) <span class="where">· Infosys Finacle</span></h3>
+            <ul>
+              <li>Optimized PostgreSQL and automated deployments (Docker, Kubernetes, AWS).</li>
+              <li>Built monitoring stacks (Prometheus + Grafana) and improved reliability.</li>
+              <li>Partnered with data teams on analytics use cases for banking clients.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Projects ===== -->
+    <section class="container" id="projects">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Projects</div>
+          <h2>Selected work</h2>
+        </div>
+        <a class="btn" href="https://github.com/" target="_blank" rel="noopener">View GitHub →</a>
+      </div>
+
+      <div class="grid">
+        <!-- Project 1 -->
+        <article class="proj" data-reveal>
+          <div class="proj-media">
+            <!-- Replace with an embedded video or image screenshot -->
+            <video src="assets/localgov-fiscal-assistant-demo.mp4" poster="assets/localgov-fiscal-assistant-thumb.jpg" controls preload="metadata"></video>
+          </div>
+          <div>
+            <h3>LocalGov Fiscal Assistant (AI Agent)</h3>
+            <p>Ask municipal finance questions in plain English and get back charts, tables, and citations. Prototype powered by LLM + SQL + plotting.</p>
+            <div class="meta">
+              <span class="tag">Python</span>
+              <span class="tag">LLM</span>
+              <span class="tag">Pandas</span>
+              <span class="tag">Matplotlib</span>
             </div>
-            <div class="project-card">
-                <h3>Somerville Crash Data Analysis</h3>
-                <p>Analyzed crash data to identify key factors influencing injuries using Python and SQL.</p>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#" aria-disabled="true">Live demo (soon)</a>
+              <a class="btn ghost" href="#">Case study →</a>
             </div>
-            <div class="project-card">
-                <h3>Air Quality and Traffic Impact Study</h3>
-                <p>Explored the relationship between air pollution and traffic data using GIS and Python.</p>
+          </div>
+        </article>
+
+        <!-- Project 2 -->
+        <article class="proj" data-reveal>
+          <div class="proj-media">
+            <div class="placeholder">Upload: assets/nyc-ace-map.png (heatmap)</div>
+          </div>
+          <div>
+            <h3>NYC ACE Violations — Hotspot & Equity Analysis</h3>
+            <p>Processed NYC Open Data (bus lane & stop violations), joined with spatial layers and demographics to surface hotspots and inequities.</p>
+            <div class="meta">
+              <span class="tag">Python</span>
+              <span class="tag">ArcGIS/QGIS</span>
+              <span class="tag">PostGIS</span>
             </div>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#">Write‑up →</a>
+              <a class="btn ghost" href="#">Repo →</a>
+            </div>
+          </div>
+        </article>
+
+        <!-- Project 3 -->
+        <article class="proj" data-reveal>
+          <div class="proj-media">
+            <div class="placeholder">Upload: assets/anpr-demo.mp4 (video)</div>
+          </div>
+          <div>
+            <h3>Real‑time License Plate Recognition (YOLOv4)</h3>
+            <p>Built a demo pipeline for ANPR using YOLOv4 + OpenCV + TensorFlow; benchmarked FPS and accuracy on sample traffic feeds.</p>
+            <div class="meta">
+              <span class="tag">YOLOv4</span>
+              <span class="tag">OpenCV</span>
+              <span class="tag">TensorFlow</span>
+            </div>
+            <div style="margin-top:12px; display:flex; gap:10px; flex-wrap:wrap;">
+              <a class="btn" href="#">Demo video →</a>
+              <a class="btn ghost" href="#">Tech notes →</a>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Gallery placeholders -->
+      <div style="margin-top:20px" class="card" data-reveal>
+        <div style="padding:16px 16px 0">
+          <div class="kicker">Gallery</div>
+          <h3 style="margin:6px 0 14px">Screenshots & Visuals</h3>
         </div>
+        <div class="gallery" style="padding: 0 16px 16px">
+          <div class="skeleton" title="Upload to assets/gallery-1.jpg"></div>
+          <div class="skeleton" title="Upload to assets/gallery-2.jpg"></div>
+          <div class="skeleton" title="Upload to assets/gallery-3.jpg"></div>
+        </div>
+      </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <h2>Skills</h2>
-        <div class="skill-container">
-            <div class="skill-card">Python</div>
-            <div class="skill-card">SQL</div>
-            <div class="skill-card">Tableau</div>
-            <div class="skill-card">Power BI</div>
-            <div class="skill-card">GIS</div>
-            <div class="skill-card">Machine Learning</div>
+    <!-- ===== Skills ===== -->
+    <section class="container" id="skills">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Skills</div>
+          <h2>Tools I use</h2>
         </div>
+      </div>
+      <div class="card" style="padding:18px" data-reveal>
+        <div class="skills">
+          <span class="tag">Python</span>
+          <span class="tag">SQL (PostgreSQL)</span>
+          <span class="tag">Pandas</span>
+          <span class="tag">Tableau / Power BI</span>
+          <span class="tag">ArcGIS / QGIS</span>
+          <span class="tag">Docker · Kubernetes</span>
+          <span class="tag">AWS</span>
+          <span class="tag">NLP</span>
+          <span class="tag">Matplotlib / Plotly</span>
+        </div>
+      </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="experience">
-        <h2>Experience</h2>
-        <div class="experience-card">
-            <h3>Data Lab Assistant - Tufts University</h3>
-            <p>Supported students with data analysis and visualization using Python, R, and Tableau.</p>
+    <!-- ===== Education ===== -->
+    <section class="container" id="education">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Education</div>
+          <h2>Where I’ve studied</h2>
         </div>
-        <div class="experience-card">
-            <h3>Senior Systems Engineer - Infosys</h3>
-            <p>Worked on Kubernetes, Docker, and CI/CD pipelines to improve system reliability and performance.</p>
+      </div>
+      <div class="grid grid-2" data-reveal>
+        <div class="card" style="padding:16px">
+          <h3 style="margin:0">Tufts University</h3>
+          <p class="subtle" style="margin:4px 0 8px">MS, Data Analytics — 2024–2026 (expected)</p>
+          <ul>
+            <li>Courses: Python, ML, Database Design & SQL, Communicating with Data, Advanced GIS</li>
+          </ul>
         </div>
-        <div class="experience-card">
-            <h3>Graduate Engineer Trainee - Larsen & Toubro</h3>
-            <p>Used ArcGIS and Pandas for spatial analysis and infrastructure planning.</p>
+        <div class="card" style="padding:16px">
+          <h3 style="margin:0">Bachelor’s in Civil Engineering</h3>
+          <p class="subtle" style="margin:4px 0 8px">Focus: Transportation & Project Management</p>
+          <ul>
+            <li>Projects: Bus Operations Analysis, Hospital Accessibility Routing</li>
+          </ul>
         </div>
+      </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <h2>Get in Touch</h2>
-        <form>
-            <input type="text" placeholder="Your Name" required />
-            <input type="email" placeholder="Your Email" required />
-            <textarea placeholder="Your Message" required></textarea>
-            <button type="submit" class="btn">Submit</button>
+    <!-- ===== Contact ===== -->
+    <section class="container" id="contact">
+      <div class="section-head">
+        <div>
+          <div class="kicker">Contact</div>
+          <h2>Let’s talk</h2>
+        </div>
+      </div>
+      <div class="contact-card" data-reveal>
+        <div>
+          <p>Interested in collaborating, or want a walkthrough of my projects? Drop me a note. I usually reply within a day.</p>
+          <div class="contact-actions">
+            <a class="btn primary" href="mailto:hello@example.com">Email me</a>
+            <a class="btn" href="https://www.linkedin.com/in/rahul-soma" target="_blank" rel="noopener">LinkedIn</a>
+            <a class="btn ghost" href="assets/Rahul_S_Resume.pdf" download>Résumé (PDF)</a>
+          </div>
+        </div>
+        <form class="card" style="padding:16px; background:transparent; border:none" onsubmit="event.preventDefault(); alert('This is a static demo form. Hook up Formspree or Netlify to enable submissions.');">
+          <label class="subtle" for="name">Name</label>
+          <input id="name" name="name" required style="width:100%; margin:6px 0 12px; padding:12px; border-radius:10px; border: var(--outline); background: var(--surface); color: var(--text);" placeholder="Your name" />
+          <label class="subtle" for="email">Email</label>
+          <input id="email" name="email" type="email" required style="width:100%; margin:6px 0 12px; padding:12px; border-radius:10px; border: var(--outline); background: var(--surface); color: var(--text);" placeholder="you@domain.com" />
+          <label class="subtle" for="msg">Message</label>
+          <textarea id="msg" name="message" rows="4" style="width:100%; margin:6px 0 12px; padding:12px; border-radius:10px; border: var(--outline); background: var(--surface); color: var(--text);" placeholder="Say hello…"></textarea>
+          <button class="btn" type="submit">Send →</button>
         </form>
+      </div>
     </section>
+  </main>
 
+  <footer>
+    <div class="container" style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+      <div>© <span id="year"></span> Rahul S. All rights reserved.</div>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <a class="tag" href="#home">Back to top ↑</a>
+        <a class="tag" href="assets/credits.txt">Credits</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Schema.org Person (fill in real values) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Rahul S",
+    "url": "https://your-domain.github.io/",
+    "sameAs": [
+      "https://www.linkedin.com/in/rahul-soma",
+      "https://github.com/your‑github"
+    ],
+    "jobTitle": "Data Analyst",
+    "worksFor": { "@type": "Organization", "name": "Division of Local Services (DOR, MA)" }
+  }
+  </script>
+
+  <script>
+    // Theme toggle with localStorage
+    const root = document.documentElement;
+    const toggle = document.getElementById('theme');
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') root.classList.add('light');
+    toggle?.addEventListener('click', () => {
+      root.classList.toggle('light');
+      localStorage.setItem('theme', root.classList.contains('light') ? 'light' : 'dark');
+    });
+
+    // Simple scroll‑reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: .08 });
+    document.querySelectorAll('[data-reveal]').forEach(el => observer.observe(el));
+
+    // Active link highlight
+    const links = document.querySelectorAll('.nav-links a[href^="#"]');
+    const sections = Array.from(links).map(l => document.querySelector(l.getAttribute('href'))).filter(Boolean);
+    const spy = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        const id = '#' + e.target.id;
+        const link = document.querySelector(`.nav-links a[href="${id}"]`);
+        if (e.isIntersecting) {
+          links.forEach(a => a.classList.remove('active'));
+          link?.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+    sections.forEach(s => spy.observe(s));
+
+    // Footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
